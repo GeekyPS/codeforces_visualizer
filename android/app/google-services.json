@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "12067668867",
+    "project_id": "codeforces-visualizer",
+    "storage_bucket": "codeforces-visualizer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12067668867:android:ad5c1a93fa747f90d02cb6",
+        "android_client_info": {
+          "package_name": "com.example.codeforces_visualizer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12067668867-asjcsacllq7adnqnm1o1flo4o9kfd4l7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.codeforces_visualizer",
+            "certificate_hash": "4d368393c05511cbe7be6eb1726b1ed1b33363b4"
+          }
+        },
+        {
+          "client_id": "12067668867-81fvfiujsq5oflbfhctnt2pelb89b56i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtgz_OBuUSjieV2-sLfm-5UfyR0odawzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12067668867-81fvfiujsq5oflbfhctnt2pelb89b56i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "12067668867-0c5hjum5mdkst4iiea2pf0vrafvs8io8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.codeforcesVisualizer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
