@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:codeforces_visualizer/views/auth_screen.dart';
+import 'package:codeforces_visualizer/views/user_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -20,14 +21,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) =>
-              snapshot.hasData ? HomeScreen() : AuthScreen()),
+              snapshot.hasData ? UserProfile() : UserProfile()),
     );
   }
 }

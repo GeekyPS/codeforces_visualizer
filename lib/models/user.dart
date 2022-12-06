@@ -9,7 +9,7 @@ class User {
   final int lastOnlineTimeSeconds; // unix format
   final int registrationTimeSeconds; // unix format
   final String avatar;
-  final String titlePhoto;
+  final String? titlePhoto;
 
   User({
     required this.handle,
