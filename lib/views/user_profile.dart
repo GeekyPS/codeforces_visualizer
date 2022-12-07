@@ -1,4 +1,4 @@
-import 'package:codeforces_visualizer/controllers/user_data.dart';
+
 import 'package:flutter/material.dart';
 
 
@@ -10,7 +10,7 @@ class UserProfile extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          child: Text('press me'),
+          child: const Text('press me'),
           onPressed: () {
             
           },

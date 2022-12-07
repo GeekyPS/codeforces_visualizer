@@ -1,5 +1,5 @@
 import 'package:codeforces_visualizer/controllers/auth.dart';
-import 'package:codeforces_visualizer/controllers/user_data.dart';
+
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget {

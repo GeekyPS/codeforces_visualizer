@@ -16,7 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 class Auth with ChangeNotifier {
   static Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
+    if (!await launchUrl(uri, mode: LaunchMode.platformDefault)) {
       throw 'Could not launch $url';
     }
   }
@@ -25,7 +25,6 @@ class Auth with ChangeNotifier {
       String userHandle, String contestId, String index) async {
     List<Submission> submissions =
         await UserData.fetchUserSubmissions(userHandle);
-    print(submissions[1].problem.index);
 
     if (submissions[0].contestId.toString() == contestId &&
         submissions[0].problem.index == index) {
@@ -74,8 +73,8 @@ class Auth with ChangeNotifier {
                   ],
                 );
               });
-        } on FirebaseException catch (error) {
-          print(error.message);
+        } on FirebaseException catch (_) {
+          // print(error.message);
         }
       }
     }
@@ -122,7 +121,6 @@ class Auth with ChangeNotifier {
     } else {
       // handle error
     }
-    print(problemLink);
 
     List<String> returnList = [problemLink, name, contestId, index];
     return returnList;
@@ -152,6 +150,7 @@ class Auth with ChangeNotifier {
                         onPressed: () async {
                           await _launchUrl(problem[0]);
 
+                    
                           Navigator.of(context).pushNamed(CFAuth2.routename,
                               arguments: {
                                 'problem': problem,
@@ -164,6 +163,7 @@ class Auth with ChangeNotifier {
               ));
     } else {
       final snackbar = SnackBar(content: Text(body['comment']));
+
       ScaffoldMessenger.of(context).showSnackBar(snackbar);
     }
 

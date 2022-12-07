@@ -78,7 +78,7 @@ class UserData with ChangeNotifier {
     } else {
       //handle error
     }
-    print(submissiondata[0].contestId);
+
 
     return submissiondata;
   }
