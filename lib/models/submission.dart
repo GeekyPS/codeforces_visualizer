@@ -5,9 +5,9 @@ import './problem.dart';
 class Submission {
   final int id;
   final int? contestId;
-  final String creationTimeSeconds; // unix format
+  final int creationTimeSeconds; // unix format
   final Problem problem;
-  final Party party;
+  final Party? party;
   final String programmingLanguage;
   final String verdict;
   final int passedTestCount;
@@ -16,7 +16,7 @@ class Submission {
 
   Submission({
     required this.id,
-    this.contestId,
+    required this.contestId,
     required this.creationTimeSeconds,
     required this.problem,
     required this.party,

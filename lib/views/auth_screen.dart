@@ -1,7 +1,9 @@
 import 'package:codeforces_visualizer/controllers/auth.dart';
+import 'package:codeforces_visualizer/controllers/user_data.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget {
+  static const routename = '/authscreen';
   const AuthScreen({super.key});
 
   @override
@@ -13,11 +15,10 @@ class AuthScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                googleSignIn(context);
+                Auth.googleSignIn(context);
               },
               child: const Text('google sign in'),
             ),
-            
           ],
         ),
       ),

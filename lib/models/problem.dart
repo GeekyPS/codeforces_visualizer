@@ -4,13 +4,14 @@ class Problem {
   final String name;
   final String type;
   final String? rating;
-  final List<String> tags;
+  final List<dynamic> tags;
 
-  Problem(
-      {this.contestId,
-      required this.index,
-      required this.name,
-      required this.type,
-      this.rating,
-      required this.tags});
+  Problem({
+    this.contestId,
+    required this.index,
+    required this.name,
+    required this.type,
+    this.rating,
+    required this.tags,
+  });
 }
