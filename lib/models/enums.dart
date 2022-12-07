@@ -13,13 +13,13 @@
 //   FINISHED,
 // }
 
-// enum participantType {
-//   CONTESTANT,
-//   PRACTICE,
-//   VIRTUAL,
-//   MANAGER,
-//   OUT_OF_COMPETITION,
-// }
+ enum participant_type {
+   CONTESTANT,
+   PRACTICE,
+   VIRTUAL,
+   MANAGER,
+   OUT_OF_COMPETITION,
+ }
 
 // enum problem_type {
 //   PROGRAMMING,
@@ -63,3 +63,8 @@
 //   TESTS9,
 //   TESTS10,
 // }
+
+enum problemresult_type {
+  PRELIMINARY,
+  FINAL
+}

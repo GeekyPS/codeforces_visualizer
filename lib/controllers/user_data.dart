@@ -5,6 +5,7 @@ import 'package:codeforces_visualizer/models/rating_change.dart';
 import 'package:codeforces_visualizer/models/submission.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../models/party.dart';
 import '../models/user.dart';
 
 class UserData with ChangeNotifier {
@@ -59,6 +60,15 @@ class UserData with ChangeNotifier {
       //result[i]['problem']
 
       for (var i = 0; i < result.length; i++) {
+        List membersresult = result[i]['author']['members'];
+        List<Member> membersdata = [];
+
+        for(var j = 0; j < membersresult.length; j++) {
+          membersdata.add(Member(
+              handle: membersresult[j]['handle'])
+          );
+        }
+
         submissiondata.add(Submission(
             id: result[i]['id'],
             contestId: result[i]['contestId'],
@@ -68,7 +78,12 @@ class UserData with ChangeNotifier {
                 name: result[i]['problem']['name'],
                 type: result[i]['problem']['type'],
                 tags: result[i]['problem']['tags']),
-            party: result[i]['party'],
+            party: Party(
+                contestId: result[i]['author']['contestId'],
+                members: membersdata,
+                participantType: result[i]['author']['participantType'],
+                ghost: result[i]['author']['ghost'],
+                startTimeSeconds: result[i]['author']['startTimeSeconds']),
             programmingLanguage: result[i]['programmingLanguage'],
             verdict: result[i]['verdict'],
             passedTestCount: result[i]['passedTestCount'],
