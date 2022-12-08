@@ -11,15 +11,44 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 
 class Auth with ChangeNotifier {
-  static Future<void> _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (!await launchUrl(uri, mode: LaunchMode.platformDefault)) {
-      throw 'Could not launch $url';
+
+  static Future<void> _launchUrl(BuildContext context, String url) async {
+    final theme = Theme.of(context);
+    print(url);
+    try {
+      await launch(
+        url,
+        customTabsOption: CustomTabsOption(
+          toolbarColor: theme.primaryColor,
+          enableDefaultShare: true,
+          enableUrlBarHiding: true,
+          showPageTitle: true,
+          animation: CustomTabsSystemAnimation.slideIn(),
+          extraCustomTabs: const <String>[],
+        ),
+        safariVCOption: SafariViewControllerOption(
+          preferredBarTintColor: theme.primaryColor,
+          preferredControlTintColor: Colors.white,
+          barCollapsingEnabled: true,
+          entersReaderIfAvailable: false,
+          dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
+        ),
+      );
+    } catch (e) {
+      // An exception is thrown if browser app is not installed on Android device.
+      debugPrint(e.toString());
     }
   }
+
+  // static Future<void> _launchUrl(String url) async {
+  //   final uri = Uri.parse(url);
+  //   if (!await launchUrl(uri, mode: LaunchMode.platformDefault)) {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   static Future<bool> isSubmitted(
       String userHandle, String contestId, String index) async {
@@ -41,38 +70,38 @@ class Auth with ChangeNotifier {
 
       if (googleAuth.accessToken != null && googleAuth.idToken != null) {
         try {
-          await FirebaseAuth.instance.signInWithCredential(
-            GoogleAuthProvider.credential(
-              accessToken: googleAuth.accessToken,
-              idToken: googleAuth.idToken,
-            ),
-          );
           final name = googleAccount.displayName;
           final imageUrl = googleAccount.photoUrl;
           final email = googleAccount.email;
 
           await const FlutterSecureStorage().write(key: 'email', value: email);
 
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Hi, $name, your email id is $email'),
-                  content:
-                      CircleAvatar(child: Image.network(imageUrl ?? 'hello')),
-                  actions: [
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('next'),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          google_logout(context);
-                        },
-                        child: const Text('Logout'))
-                  ],
-                );
-              });
+          // showDialog(
+          //     context: context,
+          //     builder: (BuildContext context) {
+          //       return AlertDialog(
+          //         title: Text('Hi, $name, your email id is $email'),
+          //         content:
+          //             CircleAvatar(child: Image.network(imageUrl ?? 'hello')),
+          //         actions: [
+          //           TextButton(
+          //             onPressed: () {},
+          //             child: const Text('next'),
+          //           ),
+          //           TextButton(
+          //               onPressed: () {
+          //                 google_logout(context);
+          //               },
+          //               child: const Text('Logout'))
+          //         ],
+          //       );
+          //     });
+          await FirebaseAuth.instance.signInWithCredential(
+            GoogleAuthProvider.credential(
+              accessToken: googleAuth.accessToken,
+              idToken: googleAuth.idToken,
+            ),
+          );
         } on FirebaseException catch (_) {
           // print(error.message);
         }
@@ -148,7 +177,7 @@ class Auth with ChangeNotifier {
                         'Submit a compilation error to question:-> "${problem[1]}"'),
                     TextButton(
                         onPressed: () async {
-                          await _launchUrl(problem[0]);
+                          await _launchUrl(context, problem[0]);
 
                     
                           Navigator.of(context).pushNamed(CFAuth2.routename,

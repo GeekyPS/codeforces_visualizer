@@ -13,11 +13,15 @@ class AuthScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Auth.googleSignIn(context);
-              },
-              child: const Text('google sign in'),
+            Builder(
+              builder: (context) {
+                return ElevatedButton(
+                  onPressed: () {
+                    Auth.googleSignIn(context);
+                  },
+                  child: const Text('google sign in'),
+                );
+              }
             ),
           ],
         ),
